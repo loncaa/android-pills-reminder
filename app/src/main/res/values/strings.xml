@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Pink version</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_reset">Restart</string>
+
+    <string name="notification_confirm">I\'m.</string>
+    <string name="notification_close">Later.</string>
+    <string name="notification_title">You have new notification.</string>
+    <string name="notification_content">Take a pill.</string>
+
+
+    <string name="setting_title">Title</string>
+    <string name="setting_done">Done</string>
+    <string name="setting_cancel">Cancel</string>
+</resources>
