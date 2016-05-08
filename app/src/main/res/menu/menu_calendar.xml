@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.CalendarActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_reset"
         android:orderInCategory="100"
-        android:title="@string/action_addtime"
-        android:icon="@drawable/ic_schedule_white_48dp"
+        android:title="@string/action_reset"
+        android:icon="@drawable/ic_restore_white_48dp"
         app:showAsAction="always" />
 </menu>

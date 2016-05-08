@@ -1,40 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
     <RelativeLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/appbar_padding_top"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/appbar_padding_top"
-                android:theme="@style/AppTheme.AppBarOverlay">
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+            </android.support.v7.widget.Toolbar>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    app:popupTheme="@style/AppTheme.PopupOverlay">
+        </android.support.design.widget.AppBarLayout>
 
-                </android.support.v7.widget.Toolbar>
 
-            </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout2">
 
-            <hr.magicpot.projectpliva.custome.NoScrollableViewPager
-                android:id="@+id/container"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_below="@+id/appbar" />
+                android:text="Tap"
+                android:singleLine="true"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView2"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+
+                android:src="@drawable/ic_schedule_white_48dp"
+                android:tint="@color/colorPrimaryDark"
+                android:id="@+id/imageView3"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_toEndOf="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="and start "
+                android:singleLine="true"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/textView1"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_toRightOf="@+id/imageView3"
+                android:layout_toEndOf="@+id/imageView3" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pill reminder"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

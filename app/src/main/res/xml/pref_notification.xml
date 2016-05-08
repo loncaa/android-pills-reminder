@@ -1,0 +1,41 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Required fields">
+
+        <ListPreference
+            android:key="@string/pillTypeKey"
+            android:title="@string/pill_type"
+            android:dialogTitle="Select pill type"
+            android:entries="@array/pref_pill_type"
+            android:entryValues="@array/pref_pill_type_values"
+            android:summary="@string/pilltypePrefSummary"/>
+
+        <Preference
+            android:title="First pill date"
+            android:key="@string/btnDate"
+            android:summary="@string/datePrefSummary" />
+
+        <Preference
+            android:title="First pill time"
+            android:key="@string/btnTime"
+            android:summary="@string/timePrefSummary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Notifications look">
+
+        <EditTextPreference
+            android:key="@string/titleKey"
+            android:title="Notification Title"
+            android:dialogTitle="Set new notification title"
+            android:summary="@string/notification_title"/>
+
+        <EditTextPreference
+            android:key="@string/subtitleKey"
+            android:title="Notification subtitle"
+            android:dialogTitle="Set new notification subtitle"
+            android:summary="@string/notification_subtitle"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

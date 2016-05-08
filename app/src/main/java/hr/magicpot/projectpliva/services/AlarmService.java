@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.renderscript.RenderScript;
 import android.support.v7.app.NotificationCompat;
 
 import java.util.Date;
@@ -54,7 +53,7 @@ public class AlarmService extends IntentService {
         builder.setSmallIcon(R.drawable.blue_pill)
                 .setColor(Color.rgb(53, 153, 219))
                 .setContentTitle(getResources().getString(R.string.notification_title))
-                .setContentText(getResources().getString(R.string.notification_content))
+                .setContentText(getResources().getString(R.string.notification_subtitle))
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(2) //priority_max
                 .setAutoCancel(true)

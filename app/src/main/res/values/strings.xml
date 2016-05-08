@@ -2,14 +2,39 @@
     <string name="app_name">Pink version</string>
     <string name="action_settings">Settings</string>
     <string name="action_reset">Restart</string>
+    <string name="action_addtime">Add Time</string>
+    <string name="action_done">Done</string>
 
     <string name="notification_confirm">I\'m.</string>
     <string name="notification_close">Later.</string>
     <string name="notification_title">You have new notification.</string>
-    <string name="notification_content">Take a pill.</string>
+    <string name="notification_subtitle">Take a pill.</string>
 
 
     <string name="setting_title">Title</string>
     <string name="setting_done">Done</string>
     <string name="setting_cancel">Cancel</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- preference keys-->
+    <string name="btnDate">btnDate</string>
+    <string name="btnTime">btnTime</string>
+    <string name="titleKey">titleKey</string>
+    <string name="subtitleKey">subtitleKey</string>
+    <string name="pillTypeKey">pillTypeKey</string>
+
+
+    <string name="pill_type">Pill type</string>
+    <string name="datePrefSummary">Select date when you take first pill</string>
+    <string name="timePrefSummary">Select time when you take first pill</string>
+    <string name="pilltypePrefSummary">Select type of pills</string>
+    <string name="requiredWarning">Fill all required fileds!</string>
+    <string-array name="pref_pill_type">
+        <item>21 active + 7 pause</item>
+        <item>25 active + 10 pause</item>
+    </string-array>
+    <string-array name="pref_pill_type_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

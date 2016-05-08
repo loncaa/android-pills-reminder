@@ -2,28 +2,20 @@ package hr.magicpot.projectpliva.custome;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
-import com.roomorama.caldroid.CalendarHelper;
-import java.util.Calendar;
-import java.util.HashMap;
+
 import java.util.Map;
-import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import hirondelle.date4j.DateTime;
 import hr.magicpot.projectpliva.R;
 import hr.magicpot.projectpliva.constants.Constants;
-import hr.magicpot.projectpliva.constants.Resources;
 import hr.magicpot.projectpliva.database.MySQLiteHelper;
 import hr.magicpot.projectpliva.database.entity.PillDay;
 import hr.magicpot.projectpliva.fragments.CustomeCalendarFragment;

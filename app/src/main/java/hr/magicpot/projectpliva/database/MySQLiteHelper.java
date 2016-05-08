@@ -5,18 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
 import android.util.Log;
-
-import com.roomorama.caldroid.CalendarHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import hirondelle.date4j.DateTime;
-import hr.magicpot.projectpliva.constants.Resources;
 import hr.magicpot.projectpliva.database.entity.PillDay;
 
 /**
@@ -35,7 +30,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     public List<PillDay> cachedList = null;
-    public Map<Integer, PillDay> datePillMap = new HashMap<>();
+    public static Map<Integer, PillDay> datePillMap;
 
     public static final String DATABASE_CREATE
             = "create table " + TABLE_NAME
@@ -49,8 +44,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
     public static MySQLiteHelper getInstance(Context c) {
-        if(databaseHelper == null)
+        if(databaseHelper == null){
+            datePillMap = new HashMap<>();
             return databaseHelper = new MySQLiteHelper(c);
+        }
         else return databaseHelper;
     }
 
@@ -162,7 +159,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.endTransaction();
         db.close();
 
-        cachedList.clear();
+        if(cachedList != null)
+            cachedList.clear();
         datePillMap.clear();
     }
 
