@@ -37,4 +37,5 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+    <string name="title_activity_calendar2">Calendar2Activity</string>
 </resources>

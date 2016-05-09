@@ -2,7 +2,10 @@ package hr.magicpot.projectpliva.constants;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.BoringLayout;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -10,33 +13,59 @@ import java.util.Objects;
  */
 public final class SharedPreferencesHelper {
 
-    public static boolean getBooleanSharedPreference(String key, Context c){
+    private static Map<String, Object> keysMap = new HashMap<>(); //sprema sve keyove od sharedprefa koje se trenutno koriste u appu
+
+    public static boolean getBoolean(String key, Context c){
         return c.getSharedPreferences("pliva", Context.MODE_PRIVATE).getBoolean(key, false);
     }
 
-    public static void setBooleanSharedPreference(String key, boolean value, Context c) {
+    public static void setBoolean(String key, Boolean value, Context c) {
         SharedPreferences preferences = c.getSharedPreferences("pliva", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
+
+        keysMap.put(key, value);
     }
 
-    public static int getIntegerSharedPreference(String key, Context c){
+    public static int getInteger(String key, Context c){
         return c.getSharedPreferences("pliva", Context.MODE_PRIVATE).getInt(key, -1);
     }
 
-    public static void setIntegerSharedPreference(String key, int value, Context c) {
+    public static void setInteger(String key, Integer value, Context c) {
         SharedPreferences preferences = c.getSharedPreferences("pliva", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
+
+        keysMap.put(key, value);
     }
 
-    public static void remoteSharedPreference(String key, Context c){
+    public static void setString(String key, String value, Context c) {
+        SharedPreferences preferences = c.getSharedPreferences("pliva", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+        keysMap.put(key, value);
+    }
+
+    public static String getString(String key, Context c){
+        return c.getSharedPreferences("pliva", Context.MODE_PRIVATE).getString(key, "err");
+    }
+
+    public static void removeValue(String key, Context c){
         SharedPreferences preferences = c.getSharedPreferences("pliva", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
+    }
+
+    public static void removeAllValues(Context c){
+        SharedPreferences preferences = c.getSharedPreferences("pliva", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply(); //.commit()
     }
 
 

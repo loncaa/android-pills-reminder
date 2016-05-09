@@ -3,16 +3,16 @@ package hr.magicpot.projectpliva.activities;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -59,11 +59,9 @@ public class SettingsActivity extends AppCompatActivity implements MyTimePicker.
                     !PreferenceView.btnDate.getSummary().equals(getString(R.string.datePrefSummary)) &&
                     !PreferenceView.btnTime.getSummary().equals(getString(R.string.timePrefSummary))){
 
-                SharedPreferencesHelper.setBooleanSharedPreference("initialized", true, getApplicationContext());
+                SharedPreferencesHelper.setBoolean("initialized", true, getApplicationContext());
 
-                Intent intent = new Intent(this, CalendarActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                new PillCalendarOrganizer().execute();
                 return true;
             }else{
                 Toast.makeText(this, R.string.requiredWarning, Toast.LENGTH_LONG).show();
@@ -77,17 +75,17 @@ public class SettingsActivity extends AppCompatActivity implements MyTimePicker.
     public void onDateSet(int y, int m, int d) {
         PreferenceView.btnDate.setSummary(d + ". " + new DateFormatSymbols().getMonths()[m] + " " + y);
 
-        SharedPreferencesHelper.setIntegerSharedPreference("year", y, getApplicationContext());
-        SharedPreferencesHelper.setIntegerSharedPreference("months", m, getApplicationContext());
-        SharedPreferencesHelper.setIntegerSharedPreference("day", d, getApplicationContext());
+        SharedPreferencesHelper.setInteger("year", y, getApplicationContext());
+        SharedPreferencesHelper.setInteger("months", m, getApplicationContext());
+        SharedPreferencesHelper.setInteger("day", d, getApplicationContext());
     }
 
     @Override
     public void onTimeSet(int h, int m) {
         PreferenceView.btnTime.setSummary(h+":"+m);
 
-        SharedPreferencesHelper.setIntegerSharedPreference("hours", h, getApplicationContext());
-        SharedPreferencesHelper.setIntegerSharedPreference("minutes", m, getApplicationContext());
+        SharedPreferencesHelper.setInteger("hours", h, getApplicationContext());
+        SharedPreferencesHelper.setInteger("minutes", m, getApplicationContext());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -140,23 +138,26 @@ public class SettingsActivity extends AppCompatActivity implements MyTimePicker.
                 }
             });
 
+            //TODO SVI PODACI SU VEC SPREMLJENI U SHAREDPREFF!!!!
             Preference.OnPreferenceChangeListener preferenceChangeListener = new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if(preference instanceof ListPreference) { //pill type
                         int n = Integer.parseInt((String) newValue);
                         preference.setSummary(((ListPreference) preference).getEntries()[n]);
+
+                        //tip pilula spremiti u preference
                     }
-                    else if(preference instanceof EditTextPreference) { //notification title and subtitle
+                    else { //notification title and subtitle
                         String key = preference.getKey();
                         if(key == getString(R.string.titleKey)){
-
+                            SharedPreferencesHelper.setString("notification_title", (String) newValue, getActivity());
                         }else if(key == getString(R.string.subtitleKey)){
-
+                            SharedPreferencesHelper.setString("notification_subtitle", (String) newValue, getActivity());
                         }
-                    }
-                    else //date and time dialog
+
                         preference.setSummary((String) newValue);
+                    }
 
                     return true;
                 }
@@ -169,4 +170,28 @@ public class SettingsActivity extends AppCompatActivity implements MyTimePicker.
 
     }
 
+    private class PillCalendarOrganizer extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //bude bijelo i ovo se vidi, nakon toga se pojavi fragment!
+            Toast.makeText(getApplicationContext(), "Plesase wait a moment...", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.w("ASYNC", "Obrada");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
 }

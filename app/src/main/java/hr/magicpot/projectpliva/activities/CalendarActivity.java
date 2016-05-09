@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.roomorama.caldroid.CaldroidFragment;
 
 import hr.magicpot.projectpliva.R;
 import hr.magicpot.projectpliva.constants.Constants;
@@ -34,7 +31,7 @@ public class CalendarActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.calendar_toolbar);
         setSupportActionBar(toolbar);
 
-        new FragmentReplace().execute();
+        new FragmentReplacer().execute();
     }
 
     @Override
@@ -47,12 +44,7 @@ public class CalendarActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_reset) {
-            SharedPreferencesHelper.remoteSharedPreference("initialized",getApplicationContext());
-            SharedPreferencesHelper.remoteSharedPreference("minutes", getApplicationContext());
-            SharedPreferencesHelper.remoteSharedPreference("hourOfDay", getApplicationContext());
-            SharedPreferencesHelper.remoteSharedPreference("year", getApplicationContext());
-            SharedPreferencesHelper.remoteSharedPreference("months",getApplicationContext());
-            SharedPreferencesHelper.remoteSharedPreference("day",getApplicationContext());
+            SharedPreferencesHelper.removeAllValues(getApplicationContext());
 
             MySQLiteHelper database = MySQLiteHelper.getInstance(this);
             database.deleteAllPills();
@@ -79,7 +71,7 @@ public class CalendarActivity extends AppCompatActivity {
         nm.cancel(Constants.ALARM_SERVICE_ID);
     }
 
-    private class FragmentReplace extends AsyncTask<Void, Void, Void>
+    private class FragmentReplacer extends AsyncTask<Void, Void, Void>
     {
         @Override
         protected Void doInBackground(Void... params) {

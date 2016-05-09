@@ -3,6 +3,8 @@ package hr.magicpot.projectpliva.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import hr.magicpot.projectpliva.R;
 import hr.magicpot.projectpliva.constants.SharedPreferencesHelper;
 import hr.magicpot.projectpliva.database.MySQLiteHelper;
 
@@ -15,7 +17,9 @@ public class SplashScreenActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        boolean init = SharedPreferencesHelper.getBooleanSharedPreference("initialized", getApplicationContext());
+        boolean init = SharedPreferencesHelper.getBoolean("initialized", getApplicationContext());
+        SharedPreferencesHelper.setString("notification_title", getResources().getString(R.string.notification_title), getApplicationContext());
+        SharedPreferencesHelper.setString("notification_subtitle", getResources().getString(R.string.notification_subtitle), getApplicationContext());
 
         //ako je vec inicijalizirnao vrijeme pozivanja notifikacije, onda dohvati podatke iz baze
         //otvori calendarActivity u suprotnome mainActivity

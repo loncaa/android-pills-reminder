@@ -15,6 +15,7 @@ import java.util.Date;
 import hr.magicpot.projectpliva.R;
 import hr.magicpot.projectpliva.constants.Action;
 import hr.magicpot.projectpliva.constants.Constants;
+import hr.magicpot.projectpliva.constants.SharedPreferencesHelper;
 import hr.magicpot.projectpliva.receivers.ActionReceiver;
 import hr.magicpot.projectpliva.receivers.DeleteNotificationReceiver;
 
@@ -52,8 +53,8 @@ public class AlarmService extends IntentService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.drawable.blue_pill)
                 .setColor(Color.rgb(53, 153, 219))
-                .setContentTitle(getResources().getString(R.string.notification_title))
-                .setContentText(getResources().getString(R.string.notification_subtitle))
+                .setContentTitle(SharedPreferencesHelper.getString("notification_title", getApplicationContext()))
+                .setContentText(SharedPreferencesHelper.getString("notification_subtitle", getApplicationContext()))
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(2) //priority_max
                 .setAutoCancel(true)
